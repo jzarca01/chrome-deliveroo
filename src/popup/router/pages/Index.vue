@@ -10,10 +10,10 @@
 <script>
 import Vue from "vue";
 import VueFormGenerator from "vue-form-generator";
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
-const API = "http://apililo.localtunnel.me/deliveroo";
+const API = "http://localhost:3000/login";
 
 Vue.use(VueAxios, axios);
 Vue.use(VueFormGenerator);
@@ -60,10 +60,15 @@ export default {
   },
   methods: {
     createAccount(email, password) {
-      console.log("this", this);
-      this.$http.get(API).then((response) => {
-        console.log(response)
-      })
+      console.log("email", email);
+      console.log("password", password);
+      this.axios.post(API, {
+          "email": email,
+          "password": password
+        }
+      ).then(response => {
+          this.$router.push('/login');
+      });
     }
   }
 }
